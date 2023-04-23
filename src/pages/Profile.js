@@ -15,8 +15,8 @@ const Profile = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
-  const currUser = "aV8UDZqUFZOd6yd2SGCtM80xLrG3";
-  // const currUser = auth.currentUser.uid;
+  // const currUser = "aV8UDZqUFZOd6yd2SGCtM80xLrG3";
+  const currUser = auth.currentUser.uid;
 
   // Get location
   useEffect(() => {
@@ -51,7 +51,7 @@ const Profile = () => {
       getDoc(docRef).then((doc) => {
         if (doc.exists()) {
           setConnections(prevConnections => [
-            ...prevConnections, 
+            ...prevConnections,
             {
               name: doc.data().name,
               hometown: doc.data().hometown,
@@ -122,28 +122,28 @@ const Profile = () => {
               id="remarksInput"
               className="old-text"
               placeholder='(insert about-me)'
-              ></textarea>
+            ></textarea>
           </header>
         </div>
-        <button id='savebutton' onClick={updateProfile}>Save Card</button> 
+        <button id='savebutton' onClick={updateProfile}>Save Card</button>
         <p id="saveMsg">Saved!</p>
       </div>
       <div id="qr-section">
         <p>This is your QR code. Print it out so people can scan it!</p>
         <div>
           <div id="qr-code-caption">Social Scan</div>
-          <QRCode value={`http://localhost:3000/user/${currUser}`} size={180}/>
+          <QRCode value={`https://la-deploy.vercel.app/user/${currUser}`} size={180} />
         </div>
       </div>
       <div className='section' id="collectionSection">
         <div id="collectionWrapper">
           <div id="collection">
-          <h1>my card collection</h1>
+            <h1>my card collection</h1>
             {connections.map((user) => {
               return (
                 <div>
-                  <Card name={user.name} hometown={user.hometown} remarks={user.remarks} lat={user.lat} long={user.long} location={true}/>
-                  <br/>
+                  <Card name={user.name} hometown={user.hometown} remarks={user.remarks} lat={user.lat} long={user.long} location={true} />
+                  <br />
                 </div>
               )
             })}
